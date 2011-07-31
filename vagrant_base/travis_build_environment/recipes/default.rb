@@ -21,14 +21,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-directory node[:travis_build_environment][:path] do
-  owner "vagrant"
-  group "vagrant"
-  mode  0755
-  action :create
-end
-
-
 include_recipe "travis_build_environment::root"
 include_recipe "travis_build_environment::vagrant"
 
@@ -38,4 +30,12 @@ cookbook_file "/etc/default/locale" do
   mode 0644
 
   source "etc/default/locale.sh"
+end
+
+template "/etc/hosts" do
+  owner "root"
+  group "root"
+  mode 0644
+
+  source "etc/hosts.erb"
 end
